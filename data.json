@@ -1,0 +1,38 @@
+{
+  "usuario": {
+    "nombre": "unknow",
+    "puntos": 1250,
+    "kilosReciclados": 48.5,
+    "nivel": "Eco-Guardián",
+    "avatar": "https://i.pinimg.com/736x/b4/0a/c1/b40ac1d5e1333560baaced420b13ba1c.jpg",
+    "historial": [
+      { "fecha": "01 Sep 2026", "material": "Plástico PET", "cantidad": "3.2 kg", "puntos": "+150 pts", "casetica": "Casetica Norte" },
+      { "fecha": "28 Ago 2026", "material": "Aluminio / Latas", "cantidad": "1.8 kg", "puntos": "+120 pts", "casetica": "Casetica Eco-Parque" },
+      { "fecha": "22 Ago 2026", "material": "Vidrio", "cantidad": "5.0 kg", "puntos": "+200 pts", "casetica": "Casetica Metro" }
+    ],
+    "recompensasReclamadas": [
+      { "titulo": "Azitromicina", "fecha": "25 Ago 2026", "codigo": "ECO-8891-MET" },
+      { "titulo": "Docena de huevos", "fecha": "15 Ago 2026", "codigo": "ECO-3321-CIN" }
+    ]
+  },
+  "caseticas": [
+    {
+      "nombre": "Casetica Norte - Plaza Central",
+      "estado": "Operativa 24/7",
+      "imagen": "https://i.pinimg.com/736x/47/9f/f0/479ff052ef6938daf1ad8718847232b7.jpg",
+      "descripcion": "Punto inteligente con sensores de peso automático para plástico PET, latas y vidrio."
+    },
+    {
+      "nombre": "Casetica Eco-Parque Solar",
+      "estado": "Operativa",
+      "imagen": "https://i.pinimg.com/1200x/1a/7a/6a/1a7a6a7bafa4e9e6aee5963e64a15ea3.jpg",
+      "descripcion": "Módulo solar autónomo para depósito de papel, cartón y empaques Tetra Pak."
+    },
+    {
+      "nombre": "Casetica Estación Central",
+      "estado": "Alta Afluencia",
+      "imagen": "https://i.pinimg.com/736x/ca/d8/61/cad8610a7e1df6594c54012ea24cd515.jpg",
+      "descripcion": "Estación de recarga rápida con compactación en tiempo real."
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoCaseticas - Portal del Usuario</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-aero-dashboard">
+
+  <header class="glass-panel header">
+    <div class="logo">🌿 EcoCaseticas</div>
+    <nav class="main-nav">
+      <button class="nav-tab active" onclick="switchDashboardTab('perfil')">👤 Mi Perfil</button>
+      <button class="nav-tab" onclick="switchDashboardTab('tienda')">🛒 Tienda</button>
+      <button class="nav-tab" onclick="switchDashboardTab('noticias')">📢 Noticias</button>
+      <button class="nav-tab highlight-tab" onclick="switchDashboardTab('puntos')">⚡ Conseguir Puntos</button>
+    </nav>
+    <button class="aero-btn btn-logout" onclick="logout()">Cerrar Sesión</button>
+  </header>
+
+  <main class="container">
+    <div id="caseticas-container" class="caseticas-grid"></div>
+    
+    <!-- PESTAÑA 1: MI PERFIL -->
+    <div id="view-perfil" class="tab-view">
+      
+      <!-- Cuadro contenedor principal del Perfil -->
+      <section class="glass-panel profile-card">
+        
+        <!-- Encabezado con Foto, Nombre y Botón de Edición -->
+        <div class="profile-header">
+          <div class="avatar-holder">
+            <img id="user-avatar" src="" alt="Foto de Perfil" class="profile-avatar-img">
+            <button type="button" class="edit-avatar-btn" onclick="abrirModalEdicion()" title="Editar Perfil">✏️</button>
+          </div>
+          
+          <div class="user-title-group">
+            <h2 id="user-name">¡Hola, usuario!</h2>
+            <button type="button" class="aero-btn btn-sm" onclick="abrirModalEdicion()">Editar Perfil</button>
+          </div>
+        </div>
+
+        <!-- Barra de Progreso de Nivel (Dentro del cuadro) -->
+        <div class="level-container">
+          <div class="level-info">
+            <span class="badge" id="user-level">Eco-Guardián</span>
+            <span class="level-progress-text" id="level-progress-text">1250 / 2000 pts para el siguiente nivel</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="level-bar-fill" style="width: 62.5%;"></div>
+          </div>
+        </div>
+
+        <!-- Cajas de Estadísticas (Puntos y Kilogramos) -->
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-val" id="user-points">1250</span>
+            <span class="stat-label">Puntos Eco</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-val" id="user-kg">48.5 kg</span>
+            <span class="stat-label">Reciclados</span>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Historial y Recompensas (Mantienen su posición inferior) -->
+      <div class="dashboard-grid">
+        <section class="glass-panel">
+          <h3>📋 Historial de Reciclaje</h3>
+          <div id="history-container" class="history-list"></div>
+        </section>
+
+        <section class="glass-panel">
+          <h3>🎟️ Recompensas Obtenidas</h3>
+          <div id="claimed-container" class="claimed-list"></div>
+        </section>
+      </div>
+
+    </div>
+
+
+
+<!-- Pestaña Tienda -->
+<div id="view-tienda" class="tab-view">
+  <section class="glass-panel">
+    <h3>🛒 Catálogo de Recompensas</h3>
+    <div id="store-container" class="store-grid">
+      <!-- JavaScript llenará esto automáticamente -->
+    </div>
+  </section>
+</div>
+
+<!-- Pestaña Noticias -->
+<div id="view-noticias" class="tab-view hidden">
+  <section class="glass-panel">
+    <h3>📢 Novedades y Empresa</h3>
+    <div id="news-full-container" class="news-list">
+      <!-- JavaScript llenará esto automáticamente -->
+    </div>
+  </section>
+</div>
+
+    <!-- PESTAÑA 4: CONSEGUIR PUNTOS (MINIJUEGO) -->
+    <div id="view-puntos" class="tab-view hidden">
+      <section class="glass-panel game-container-panel">
+        <div class="game-header">
+          <div>
+            <h3>🧺 Eco-Catch: Recolector de Residuos</h3>
+            <p>Mueve la casetica para atrapar el material reciclable. ¡Cada ítem suma puntos a tu saldo real!</p>
+          </div>
+          <div class="game-stats">
+            <span class="game-score">Puntos Sesión: <strong id="game-score-val">0</strong></span>
+            <button id="btn-start-game" class="aero-btn" onclick="iniciarJuego()">¡Empezar a Jugar!</button>
+          </div>
+        </div>
+
+        <div class="canvas-wrapper">
+          <canvas id="ecoGameCanvas" width="600" height="350"></canvas>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <!-- MODAL VENTANA EMERGENTE: EDITAR PERFIL -->
+  <div id="modal-edit-profile" class="modal-overlay hidden">
+    <div class="glass-panel modal-content">
+      <h3>✏️ Editar Perfil</h3>
+      <form id="form-edit-profile" onsubmit="guardarPerfil(event)">
+        <div class="form-group">
+          <label for="edit-name">Nombre de Usuario:</label>
+          <input type="text" id="edit-name" class="aero-input" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="edit-avatar">URL de la Foto de Perfil:</label>
+          <input type="url" id="edit-avatar" class="aero-input" placeholder="https://..." required>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="aero-btn btn-secondary" onclick="cerrarModalEdicion()">Cancelar</button>
+          <button type="submit" class="aero-btn">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
